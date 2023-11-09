@@ -1,4 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
+import { useState } from "react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,9 +10,16 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const [data, setData] = useState('<script>alert(1)</script>')
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>Welcome to Remix</h1>
+      <div>
+        <input type="text" value={data} onChange={(event) => {
+          setData(event.target.value)
+        }} />
+        <Link to={"/url/param?p=" + data}>/url/param</Link>
+      </div>
       <ul>
         <li>
           <a
